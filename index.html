@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>ZTM Bus Display</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- GÓRA -->
+<div id="top">
+  <div id="lineContainer">
+    <div id="lineBox">123</div>
+    <div id="lineType">LINIA ZWYKŁA</div>
+  </div>
+
+  <div id="nextStop">
+    NEXT STOP (ON REQUEST): <span id="nextName">CHODAKOWSKA</span>
+  </div>
+</div>
+
+<!-- TRASA -->
+<div id="route">
+  <div id="routeLine"></div>
+</div>
+
+<!-- DÓŁ -->
+<div id="footer">
+  PRAGA-POŁUDNIE
+</div>
+
+<script>
+// ====== PRZYSTANKI ======
+const stops = [
+  "LUBELSKA",
+  "ŻUPNICZA",
+  "CHODAKOWSKA",
+  "MIŃSKA",
+  "TOR KOLARSKI",
+  "SIENIORSKA",
+  "DWERNICKIEGO",
+  "WATRACZNA",
+  "ZAMENHOFA",
+  "GOCŁAW"
+];
+
+// ====== AKTUALNY PRZYSTANEK (SYMULACJA) ======
+let currentIndex = 2;
+
+// ====== RYSOWANIE TRASY ======
+const route = document.getElementById("route");
+
+stops.forEach((name, i) => {
+  const stop = document.createElement("div");
+  stop.className = "stop";
+  stop.id = "stop-" + i;
+
+  const label = document.createElement("div");
+  label.className = "stop-name";
+  label.innerText = name;
+
+  route.appendChild(stop);
+  route.appendChild(label);
+});
+
+// ====== POZYCJONOWANIE ======
+function positionStops() {
+  const width = route.offsetWidth - 100;
+  stops.forEach((_, i) => {
+    const x = 50 + i * (width / (stops.length - 1));
+    document.getElementById("stop-" + i).style.left = x + "px";
+    document.getElementsByClassName("stop-name")[i].style.left = x + "px";
+  });
+}
+
+// ====== AKTUALIZACJA ======
+function update() {
+  stops.forEach((_, i) => {
+    document.getElementById("stop-" + i).classList.remove("active");
+  });
+
+  if (currentIndex < stops.length) {
+    document.getElementById("stop-" + currentIndex).classList.add("active");
+    document.getElementById("nextName").innerText = stops[currentIndex];
+  } else {
+    document.getElementById("nextName").innerText = "KONIEC TRASY";
+  }
+}
+
+// ====== SYMULACJA JAZDY ======
+setInterval(() => {
+  currentIndex++;
+  if (currentIndex > stops.length) currentIndex = 0;
+  update();
+}, 3000);
+
+window.onresize = positionStops;
+
+positionStops();
+update();
+</script>
+
+</body>
+</html>

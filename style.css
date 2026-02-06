@@ -1,0 +1,90 @@
+body {
+  margin: 0;
+  background: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== GÓRA ===== */
+#top {
+  display: flex;
+  align-items: center;
+  border-bottom: 4px solid black;
+}
+
+#lineContainer {
+  background: purple;
+  color: white;
+}
+
+#lineBox {
+  width: 160px;
+  height: 110px;
+  font-size: 72px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#lineType {
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 4px;
+}
+
+#nextStop {
+  flex: 1;
+  padding-left: 30px;
+  font-size: 32px;
+}
+
+#nextStop span {
+  font-weight: bold;
+}
+
+/* ===== TRASA ===== */
+#route {
+  position: relative;
+  height: 180px;
+  margin-top: 10px;
+}
+
+#routeLine {
+  position: absolute;
+  top: 90px;
+  left: 50px;
+  right: 50px;
+  height: 6px;
+  background: purple;
+}
+
+.stop {
+  position: absolute;
+  top: 82px;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border: 4px solid purple;
+  border-radius: 50%;
+}
+
+.stop.active {
+  background: purple;
+}
+
+.stop-name {
+  position: absolute;
+  top: 15px;
+  transform: rotate(-45deg);
+  transform-origin: left;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* ===== DÓŁ ===== */
+#footer {
+  background: red;
+  color: white;
+  font-weight: bold;
+  padding: 6px 20px;
+}
